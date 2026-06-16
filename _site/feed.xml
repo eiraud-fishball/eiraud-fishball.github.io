@@ -4,12 +4,20 @@
   <subtitle>一个专注于技术与思考的博客空间，记录开发实践、学习笔记与生活感悟。</subtitle>
   <link href="https://example.com/feed.xml" rel="self" />
   <link href="https://example.com/" />
-  <updated>2026-06-15T00:00:00Z</updated>
+  <updated>2026-06-16T00:00:00Z</updated>
   <id>https://example.com/</id>
   <author>
     <name>Exyone</name>
     <email>hello@example.com</email>
   </author>
+  <entry>
+    <title>别把阶层固化甩锅给“性格劣质”：那些踩着底层的人，忘了自己也站在泥里</title>
+    <link href="https://example.com/posts/talking-about-social-class/" />
+    <updated>2026-06-16T00:00:00Z</updated>
+    <id>https://example.com/posts/talking-about-social-class/</id>
+    <summary>针对某博主将底层困境简化为“性格糟粕”“自我作践”的论调，本文拆解其逻辑里的傲慢与盲区：把结构性不公包装成个人选择，把资源匮乏导致的生存困境扭曲为“低级趣味”，本质上是在用幸存者偏差为自己的优越感贴金。文末引袁枚诗作结尾：“莫唱当年长恨歌，人间亦自有银河。石壕吏前夫妻别，泪比长生殿上多。”</summary>
+    <content type="html">&lt;p&gt;针对某博主将底层困境简化为“性格糟粕”“自我作践”的论调，本文拆解其逻辑里的傲慢与盲区：把结构性不公包装成个人选择，把资源匮乏导致的生存困境扭曲为“低级趣味”，本质上是在用幸存者偏差为自己的优越感贴金。文末引袁枚诗作结尾：“莫唱当年长恨歌，人间亦自有银河。石壕吏前夫妻别，泪比长生殿上多。”&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>用 Eleventy 打造一个三栏博客：从零搭建到多平台自动部署</title>
     <link href="https://example.com/posts/building-a-three-column-blog-with-eleventy/" />
@@ -17,14 +25,6 @@
     <id>https://example.com/posts/building-a-three-column-blog-with-eleventy/</id>
     <summary>之前我的个人博客用的是 Jekyll + Chirpy 主题，走了本地构建再推送的路。这次我换上了 Eleventy，从零搭建一套三栏布局的博客系统。没有用任何 CSS 框架，从设计变量到响应式布局全部手写。CI/CD 方面，一次推送同时部署到 GitHub Pages、Codeberg Pages 和 GitLab Pages。</summary>
     <content type="html">&lt;p&gt;之前我的个人博客用的是 Jekyll + Chirpy 主题，走了本地构建再推送的路。这次我换上了 Eleventy，从零搭建一套三栏布局的博客系统。没有用任何 CSS 框架，从设计变量到响应式布局全部手写。CI/CD 方面，一次推送同时部署到 GitHub Pages、Codeberg Pages 和 GitLab Pages。&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>别把阶层固化甩锅给“性格劣质”：那些踩着底层的人，忘了自己也站在泥里</title>
-    <link href="https://example.com/posts/talking-about-social-class/" />
-    <updated>2026-06-15T00:00:00Z</updated>
-    <id>https://example.com/posts/talking-about-social-class/</id>
-    <summary>针对某博主将底层困境简化为“性格糟粕”“自我作践”的论调，本文拆解其逻辑里的傲慢与盲区：把结构性不公包装成个人选择，把资源匮乏导致的生存困境扭曲为“低级趣味”，本质上是在用幸存者偏差为自己的优越感贴金。文末引袁枚诗作结尾：“莫唱当年长恨歌，人间亦自有银河。石壕吏前夫妻别，泪比长生殿上多。”</summary>
-    <content type="html">&lt;p&gt;针对某博主将底层困境简化为“性格糟粕”“自我作践”的论调，本文拆解其逻辑里的傲慢与盲区：把结构性不公包装成个人选择，把资源匮乏导致的生存困境扭曲为“低级趣味”，本质上是在用幸存者偏差为自己的优越感贴金。文末引袁枚诗作结尾：“莫唱当年长恨歌，人间亦自有银河。石壕吏前夫妻别，泪比长生殿上多。”&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>为 Chirpy 添加 Twikoo 评论：一次插件开发记录</title>
@@ -100,9 +100,9 @@
   </entry>
   <entry>
     <title>为什么我只用 BSD-2-Clause 和 Apache 2.0：一个开发者的许可证观</title>
-    <link href="https://example.com/posts/why-i-only-use-bsd2-and-apache2-licenses/" />
+    <link href="https://example.com/posts/why-choose-bsd2-and-apache2-licenses/" />
     <updated>2025-01-16T00:00:00Z</updated>
-    <id>https://example.com/posts/why-i-only-use-bsd2-and-apache2-licenses/</id>
+    <id>https://example.com/posts/why-choose-bsd2-and-apache2-licenses/</id>
     <summary>大多数开源项目在用 GPL 或 MIT。这两个我都不喜欢。这些年，我不再盲目追主流。GPL 的&quot;父爱式管制&quot;让我不舒服——它通过限制开发者来保护用户。MIT 的&quot;毫无节制的宽容&quot;也不对味——说&quot;随便用&quot;等于放弃所有责任。我的原则很简单：只留最基本的约束，把最大的自由给用户。这自然把我引向 BSD，尤其是 BSD-2-Clause。</summary>
     <content type="html">&lt;p&gt;大多数开源项目在用 GPL 或 MIT。这两个我都不喜欢。这些年，我不再盲目追主流。GPL 的&quot;父爱式管制&quot;让我不舒服——它通过限制开发者来保护用户。MIT 的&quot;毫无节制的宽容&quot;也不对味——说&quot;随便用&quot;等于放弃所有责任。我的原则很简单：只留最基本的约束，把最大的自由给用户。这自然把我引向 BSD，尤其是 BSD-2-Clause。&lt;/p&gt;</content>
   </entry>

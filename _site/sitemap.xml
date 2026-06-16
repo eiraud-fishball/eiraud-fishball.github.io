@@ -3,7 +3,7 @@
   <!-- Home page -->
   <url>
     <loc>https://exyon.ee/</loc>
-    <lastmod>2026-06-15T00:00:00Z</lastmod>
+    <lastmod>2026-06-16T00:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -40,7 +40,7 @@
 
   <url>
     <loc>https://exyon.ee/categories/life-snippets/</loc>
-    <lastmod>2026-06-15T00:00:00Z</lastmod>
+    <lastmod>2026-06-16T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -133,28 +133,28 @@
   </url>
 
   <url>
-    <loc>https://exyon.ee/tags/11ty/</loc>
-    <lastmod>2026-06-15T00:00:00Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
     <loc>https://exyon.ee/tags/mics/</loc>
-    <lastmod>2026-06-15T00:00:00Z</lastmod>
+    <lastmod>2026-06-16T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://exyon.ee/tags/philosophy/</loc>
-    <lastmod>2026-06-15T00:00:00Z</lastmod>
+    <lastmod>2026-06-16T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://exyon.ee/tags/community/</loc>
+    <lastmod>2026-06-16T00:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://exyon.ee/tags/11ty/</loc>
     <lastmod>2026-06-15T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -213,14 +213,14 @@
   <!-- Post pages -->
 
   <url>
-    <loc>https://exyon.ee/posts/building-a-three-column-blog-with-eleventy/</loc>
-    <lastmod>2026-06-15T00:00:00Z</lastmod>
+    <loc>https://exyon.ee/posts/talking-about-social-class/</loc>
+    <lastmod>2026-06-16T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://exyon.ee/posts/talking-about-social-class/</loc>
+    <loc>https://exyon.ee/posts/building-a-three-column-blog-with-eleventy/</loc>
     <lastmod>2026-06-15T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -290,7 +290,7 @@
   </url>
 
   <url>
-    <loc>https://exyon.ee/posts/why-i-only-use-bsd2-and-apache2-licenses/</loc>
+    <loc>https://exyon.ee/posts/why-choose-bsd2-and-apache2-licenses/</loc>
     <lastmod>2025-01-16T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
