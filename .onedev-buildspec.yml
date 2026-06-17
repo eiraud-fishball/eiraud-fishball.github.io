@@ -299,13 +299,16 @@ jobs:
 
 - name: Backup to Codeberg
   steps:
-  - type: PushRepository
+  - type: CommandStep
     name: push to codeberg
-    remoteUrl: '@secret:codeberg-backup-repo-url@'
-    userName: '@secret:codeberg-username@'
-    accessTokenSecret: codeberg-token
-    pushAllBranches: true
-    pushAllTags: true
+    runInContainer: false
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        git remote add codeberg '@secret:codeberg-backup-repo-url@'
+        git push codeberg --all --force
+        git push codeberg --tags --force
+    useTTY: false
     condition: SUCCESSFUL
     optional: false
   
@@ -321,13 +324,16 @@ jobs:
 
 - name: Backup to Git.gay
   steps:
-  - type: PushRepository
+  - type: CommandStep
     name: push to git.gay
-    remoteUrl: '@secret:gitgay-backup-repo-url@'
-    userName: '@secret:gitgay-username@'
-    accessTokenSecret: gitgay-token
-    pushAllBranches: true
-    pushAllTags: true
+    runInContainer: false
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        git remote add gitgay '@secret:gitgay-backup-repo-url@'
+        git push gitgay --all --force
+        git push gitgay --tags --force
+    useTTY: false
     condition: SUCCESSFUL
     optional: false
   
