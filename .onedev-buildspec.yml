@@ -163,10 +163,8 @@ jobs:
       type: DefaultInterpreter
       commands: |
         cd /tmp/exyone-blog-build
-        if ! command -v netlify &> /dev/null; then
-          npm install -g netlify-cli
-        fi
-        netlify deploy --prod --dir _site --site @secret:netlify-site-id@ --auth @secret:netlify-auth-token@ --message "Deploy from OneDev build @build_number@"
+        export PATH="/usr/local/bin:$(npm root -g):$PATH"
+        npx netlify-cli deploy --prod --dir _site --site @secret:netlify-site-id@ --auth @secret:netlify-auth-token@ --message "Deploy from OneDev build @build_number@"
     useTTY: false
     condition: SUCCESSFUL
     optional: false

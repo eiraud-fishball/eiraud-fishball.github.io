@@ -43,6 +43,7 @@ module.exports = function () {
       "杂谈": "mics",
       "哲学": "philosophy",
       "社会": "community",
+      "OneDev": "onedev",
     },
   };
 };
