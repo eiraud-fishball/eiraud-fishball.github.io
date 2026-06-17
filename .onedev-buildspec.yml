@@ -1,59 +1,72 @@
-version: 36
+version: 47
 jobs:
 - name: Build Blog
   steps:
-  - !CheckoutStep
+  - type: CheckoutStep
     name: checkout
-    cloneCredential: !DefaultCredential {}
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    cloneCredential:
+      type: DefaultCredential
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: setup build environment
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - mkdir -p "$BUILD_DIR"
-      - cp -r . "$BUILD_DIR/"
-      - cd "$BUILD_DIR"
-      - export PATH="/usr/local/bin:$PATH"
-      - node --version
-      - npm --version
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        mkdir -p "$BUILD_DIR"
+        cp -r . "$BUILD_DIR/"
+        cd "$BUILD_DIR"
+        export PATH="/usr/local/bin:$PATH"
+        node --version
+        npm --version
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: install dependencies
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - cd "$BUILD_DIR"
-      - npm ci
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        cd /tmp/exyone-blog-build
+        npm ci
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: build site
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - cd "$BUILD_DIR"
-      - npm run build
-      - if [ -d "_site" ]; then echo "Build successful! _site directory created."; ls -la _site/; else echo "Build failed! _site directory not found."; exit 1; fi
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        cd /tmp/exyone-blog-build
+        npm run build
+        if [ -d "_site" ]; then
+          echo "Build successful! _site directory created."
+          ls -la _site/
+        else
+          echo "Build failed! _site directory not found."
+          exit 1
+        fi
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !SetBuildVersionStep
+  - type: SetBuildVersionStep
     name: set build version
     buildVersion: '@build_number@'
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
-    paths: 
+    paths:
     - src/**
     - package.json
     - package-lock.json
@@ -66,37 +79,51 @@ jobs:
 
 - name: Deploy to Cloudflare Pages
   steps:
-  - !CheckoutStep
+  - type: CheckoutStep
     name: checkout
-    cloneCredential: !DefaultCredential {}
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    cloneCredential:
+      type: DefaultCredential
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: build
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - if [ ! -d "$BUILD_DIR/_site" ]; then mkdir -p "$BUILD_DIR"; cp -r . "$BUILD_DIR/"; cd "$BUILD_DIR"; export PATH="/usr/local/bin:$PATH"; npm ci; npm run build; fi
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        if [ ! -d "$BUILD_DIR/_site" ]; then
+          mkdir -p "$BUILD_DIR"
+          cp -r . "$BUILD_DIR/"
+          cd "$BUILD_DIR"
+          export PATH="/usr/local/bin:$PATH"
+          npm ci
+          npm run build
+        fi
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: deploy to cloudflare
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - cd "$BUILD_DIR"
-      - if ! command -v wrangler &> /dev/null; then npm install -g wrangler; fi
-      - export CLOUDFLARE_API_TOKEN="@secret:cloudflare-api-token@"
-      - export CLOUDFLARE_ACCOUNT_ID="@secret:cloudflare-account-id@"
-      - npx wrangler pages deploy _site --project-name exyone-blog --branch main --commit-dirty=true
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        cd /tmp/exyone-blog-build
+        if ! command -v wrangler &> /dev/null; then
+          npm install -g wrangler
+        fi
+        export CLOUDFLARE_API_TOKEN="@secret:cloudflare-api-token@"
+        export CLOUDFLARE_ACCOUNT_ID="@secret:cloudflare-account-id@"
+        npx wrangler pages deploy _site --project-name exyone-blog --branch main --commit-dirty=true
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
   
   retryCondition: never
@@ -106,35 +133,49 @@ jobs:
 
 - name: Deploy to Netlify
   steps:
-  - !CheckoutStep
+  - type: CheckoutStep
     name: checkout
-    cloneCredential: !DefaultCredential {}
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    cloneCredential:
+      type: DefaultCredential
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: build
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - if [ ! -d "$BUILD_DIR/_site" ]; then mkdir -p "$BUILD_DIR"; cp -r . "$BUILD_DIR/"; cd "$BUILD_DIR"; export PATH="/usr/local/bin:$PATH"; npm ci; npm run build; fi
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        if [ ! -d "$BUILD_DIR/_site" ]; then
+          mkdir -p "$BUILD_DIR"
+          cp -r . "$BUILD_DIR/"
+          cd "$BUILD_DIR"
+          export PATH="/usr/local/bin:$PATH"
+          npm ci
+          npm run build
+        fi
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: deploy to netlify
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - cd "$BUILD_DIR"
-      - if ! command -v netlify &> /dev/null; then npm install -g netlify-cli; fi
-      - netlify deploy --prod --dir _site --site @secret:netlify-site-id@ --auth @secret:netlify-auth-token@ --message "Deploy from OneDev build @build_number@"
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        cd /tmp/exyone-blog-build
+        if ! command -v netlify &> /dev/null; then
+          npm install -g netlify-cli
+        fi
+        netlify deploy --prod --dir _site --site @secret:netlify-site-id@ --auth @secret:netlify-auth-token@ --message "Deploy from OneDev build @build_number@"
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
   
   retryCondition: never
@@ -144,44 +185,57 @@ jobs:
 
 - name: Deploy to Codeberg Pages
   steps:
-  - !CheckoutStep
+  - type: CheckoutStep
     name: checkout
-    cloneCredential: !DefaultCredential {}
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    cloneCredential:
+      type: DefaultCredential
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: build
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - if [ ! -d "$BUILD_DIR/_site" ]; then mkdir -p "$BUILD_DIR"; cp -r . "$BUILD_DIR/"; cd "$BUILD_DIR"; export PATH="/usr/local/bin:$PATH"; npm ci; npm run build; fi
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        if [ ! -d "$BUILD_DIR/_site" ]; then
+          mkdir -p "$BUILD_DIR"
+          cp -r . "$BUILD_DIR/"
+          cd "$BUILD_DIR"
+          export PATH="/usr/local/bin:$PATH"
+          npm ci
+          npm run build
+        fi
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: deploy to codeberg pages
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - DEPLOY_DIR="/tmp/codeberg-deploy"
-      - cd "$BUILD_DIR"
-      - git config --global user.email "[email protected]"
-      - git config --global user.name "OneDev CI"
-      - git clone @secret:codeberg-pages-repo-url@ "$DEPLOY_DIR" --depth 1
-      - rm -rf "$DEPLOY_DIR"/*
-      - cp -r _site/* "$DEPLOY_DIR/"
-      - cd "$DEPLOY_DIR"
-      - echo "exyone.js.cool" > .domains
-      - git add .
-      - git commit -m "Deploy: Update site from OneDev build @build_number@"
-      - git push -f origin main
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        DEPLOY_DIR="/tmp/codeberg-deploy"
+        cd "$BUILD_DIR"
+        git config --global user.email "[email protected]"
+        git config --global user.name "OneDev CI"
+        git clone @secret:codeberg-pages-repo-url@ "$DEPLOY_DIR" --depth 1
+        rm -rf "$DEPLOY_DIR"/*
+        cp -r _site/* "$DEPLOY_DIR/"
+        cd "$DEPLOY_DIR"
+        echo "exyone.js.cool" > .domains
+        git add .
+        git commit -m "Deploy: Update site from OneDev build @build_number@"
+        git push -f origin main
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
   
   retryCondition: never
@@ -191,43 +245,56 @@ jobs:
 
 - name: Deploy to Git.gay Pages
   steps:
-  - !CheckoutStep
+  - type: CheckoutStep
     name: checkout
-    cloneCredential: !DefaultCredential {}
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    cloneCredential:
+      type: DefaultCredential
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: build
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - if [ ! -d "$BUILD_DIR/_site" ]; then mkdir -p "$BUILD_DIR"; cp -r . "$BUILD_DIR/"; cd "$BUILD_DIR"; export PATH="/usr/local/bin:$PATH"; npm ci; npm run build; fi
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        if [ ! -d "$BUILD_DIR/_site" ]; then
+          mkdir -p "$BUILD_DIR"
+          cp -r . "$BUILD_DIR/"
+          cd "$BUILD_DIR"
+          export PATH="/usr/local/bin:$PATH"
+          npm ci
+          npm run build
+        fi
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
-  - !CommandStep
+  - type: CommandStep
     name: deploy to git.gay pages
     runInContainer: false
-    interpreter: !DefaultInterpreter
-      commands:
-      - BUILD_DIR="/tmp/exyone-blog-build"
-      - DEPLOY_DIR="/tmp/gitgay-deploy"
-      - cd "$BUILD_DIR"
-      - git config --global user.email "[email protected]"
-      - git config --global user.name "OneDev CI"
-      - git clone @secret:gitgay-pages-repo-url@ "$DEPLOY_DIR" --depth 1
-      - rm -rf "$DEPLOY_DIR"/*
-      - cp -r _site/* "$DEPLOY_DIR/"
-      - cd "$DEPLOY_DIR"
-      - git add .
-      - git commit -m "Deploy: Update site from OneDev build @build_number@"
-      - git push -f origin main
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        DEPLOY_DIR="/tmp/gitgay-deploy"
+        cd "$BUILD_DIR"
+        git config --global user.email "[email protected]"
+        git config --global user.name "OneDev CI"
+        git clone @secret:gitgay-pages-repo-url@ "$DEPLOY_DIR" --depth 1
+        rm -rf "$DEPLOY_DIR"/*
+        cp -r _site/* "$DEPLOY_DIR/"
+        cd "$DEPLOY_DIR"
+        git add .
+        git commit -m "Deploy: Update site from OneDev build @build_number@"
+        git push -f origin main
     useTTY: false
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
   
   retryCondition: never
@@ -237,19 +304,20 @@ jobs:
 
 - name: Backup to Codeberg
   steps:
-  - !PushRepository
+  - type: PushRepository
     name: push to codeberg
     remoteUrl: '@secret:codeberg-backup-repo-url@'
     userName: '@secret:codeberg-username@'
     password: '@secret:codeberg-token@'
     pushAllBranches: true
     pushAllTags: true
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
-  - !TagCreateTrigger {}
+  - type: TagCreateTrigger {}
   
   retryCondition: never
   maxRetries: 3
@@ -258,19 +326,20 @@ jobs:
 
 - name: Backup to Git.gay
   steps:
-  - !PushRepository
+  - type: PushRepository
     name: push to git.gay
     remoteUrl: '@secret:gitgay-backup-repo-url@'
     userName: '@secret:gitgay-username@'
     password: '@secret:gitgay-token@'
     pushAllBranches: true
     pushAllTags: true
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: SUCCESSFUL
+    optional: false
   
   triggers:
-  - !BranchUpdateTrigger
+  - type: BranchUpdateTrigger
     branches: main
-  - !TagCreateTrigger {}
+  - type: TagCreateTrigger {}
   
   retryCondition: never
   maxRetries: 3
