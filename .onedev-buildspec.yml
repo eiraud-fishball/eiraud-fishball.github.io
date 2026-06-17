@@ -66,11 +66,6 @@ jobs:
   triggers:
   - type: BranchUpdateTrigger
     branches: main
-    paths:
-    - src/**
-    - package.json
-    - package-lock.json
-    - .eleventy.js
   
   retryCondition: never
   maxRetries: 3
