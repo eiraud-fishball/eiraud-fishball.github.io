@@ -6,62 +6,62 @@
 
 :root {
   /* ================================================================ */
-  /*  Primary — Soft Steel Blue                                        */
+  /*  Primary — Blueprint Blue (muted navy)                            */
   /* ================================================================ */
-  --accent: #5a8fb4;
-  --accent-rgb: 90, 143, 180;
-  --accent-light: #7aabc8;
-  --accent-lighter: #a8c8da;
-  --accent-dark: #407898;
-  --accent-darker: #2e5f7c;
+  --accent: #3a6b8c;
+  --accent-rgb: 58, 107, 140;
+  --accent-light: #5a8ba8;
+  --accent-lighter: #8ab0c8;
+  --accent-dark: #2a5070;
+  --accent-darker: #1a3850;
   --accent-glow: rgba(var(--accent-rgb), 0.12);
   --accent-glow-strong: rgba(var(--accent-rgb), 0.22);
 
   /* ================================================================ */
-  /*  Alternate Accent — Muted Teal                                    */
+  /*  Alternate Accent — Steel Teal                                    */
   /* ================================================================ */
-  --accent-alt: #5a9a8a;
-  --accent-alt-rgb: 90, 154, 138;
-  --accent-alt-light: #7ab4a6;
-  --accent-alt-lighter: #a4cec3;
-  --accent-alt-dark: #40806e;
-  --accent-alt-darker: #2e6858;
+  --accent-alt: #4a8a7a;
+  --accent-alt-rgb: 74, 138, 122;
+  --accent-alt-light: #6aa898;
+  --accent-alt-lighter: #9ac8ba;
+  --accent-alt-dark: #346e5e;
+  --accent-alt-darker: #24524a;
   --accent-alt-glow: rgba(var(--accent-alt-rgb), 0.12);
   --accent-alt-glow-strong: rgba(var(--accent-alt-rgb), 0.22);
 
   /* ================================================================ */
-  /*  Warm Accent — Soft Amber                                         */
+  /*  Warm Accent — Muted Brass                                        */
   /* ================================================================ */
-  --accent-warm: #c49a6c;
-  --accent-warm-rgb: 196, 154, 108;
-  --accent-warm-light: #d4b48e;
-  --accent-warm-lighter: #e4d0b8;
-  --accent-warm-dark: #a47e52;
-  --accent-warm-darker: #846438;
+  --accent-warm: #b08a60;
+  --accent-warm-rgb: 176, 138, 96;
+  --accent-warm-light: #c8a880;
+  --accent-warm-lighter: #e0c8a8;
+  --accent-warm-dark: #907048;
+  --accent-warm-darker: #705838;
   --accent-warm-glow: rgba(var(--accent-warm-rgb), 0.12);
   --accent-warm-glow-strong: rgba(var(--accent-warm-rgb), 0.22);
 
   /* ================================================================ */
-  /*  Cool Accent — Muted Lavender                                     */
+  /*  Cool Accent — Slate Lavender                                     */
   /* ================================================================ */
-  --accent-cool: #8a82a8;
-  --accent-cool-rgb: 138, 130, 168;
-  --accent-cool-light: #a8a0c0;
-  --accent-cool-lighter: #c8c0d8;
-  --accent-cool-dark: #6e6690;
-  --accent-cool-darker: #564e78;
+  --accent-cool: #7a78a0;
+  --accent-cool-rgb: 122, 120, 160;
+  --accent-cool-light: #9a98ba;
+  --accent-cool-lighter: #c0bdd8;
+  --accent-cool-dark: #5e5c82;
+  --accent-cool-darker: #484668;
   --accent-cool-glow: rgba(var(--accent-cool-rgb), 0.12);
   --accent-cool-glow-strong: rgba(var(--accent-cool-rgb), 0.22);
 
   /* ================================================================ */
-  /*  Surface Colors                                                   */
+  /*  Surface Colors  (Blueprint: cool blue-gray tones)                */
   /* ================================================================ */
-  --bg-page: #e0e8f0;
+  --bg-page: #e4e9ef;
   --bg-card: #ffffff;
   --bg-card-solid: #ffffff;
   --bg-elevated: #ffffff;
-  --bg-muted: #d0d8e0;
-  --bg-sidebar: #f7f5f0;
+  --bg-muted: #d5dce6;
+  --bg-sidebar: #f5f7f9;
 
   /* ================================================================ */
   /*  Text Colors                                                      */
@@ -73,19 +73,19 @@
   --text-inverse: #ffffff;
 
   /* ================================================================ */
-  /*  Border Colors                                                    */
+  /*  Border Colors  (cooler to match blueprint palette)               */
   /* ================================================================ */
-  --border: #ddd9d0;
+  --border: #d0d5dd;
   --border-hover: var(--accent);
   --border-light: rgba(255, 255, 255, 0.6);
 
   /* ================================================================ */
   /*  Semantic Colors                                                  */
   /* ================================================================ */
-  --tag-bg: #e8f0f4;
-  --tag-text: #3a6e8a;
-  --category-bg: #eef3f0;
-  --category-text: #3a7060;
+  --tag-bg: #e4ebf2;
+  --tag-text: #3a6080;
+  --category-bg: #eaf0ee;
+  --category-text: #3a6a60;
 
   /* ================================================================ */
   /*  Typography                                                       */
@@ -171,12 +171,12 @@
     --accent-glow: rgba(var(--accent-rgb), 0.15);
     --accent-glow-strong: rgba(var(--accent-rgb), 0.25);
 
-    --accent-alt: #e0a050;
-    --accent-alt-rgb: 224, 160, 80;
-    --accent-alt-light: #eab870;
-    --accent-alt-lighter: #f0cc98;
-    --accent-alt-dark: #c88838;
-    --accent-alt-darker: #a87028;
+    --accent-alt: #d4a860;
+    --accent-alt-rgb: 212, 168, 96;
+    --accent-alt-light: #e0bc80;
+    --accent-alt-lighter: #e8d0a0;
+    --accent-alt-dark: #b08a48;
+    --accent-alt-darker: #906e38;
     --accent-alt-glow: rgba(var(--accent-alt-rgb), 0.15);
     --accent-alt-glow-strong: rgba(var(--accent-alt-rgb), 0.25);
 
@@ -245,12 +245,12 @@
   --accent-glow: rgba(var(--accent-rgb), 0.15);
   --accent-glow-strong: rgba(var(--accent-rgb), 0.25);
 
-  --accent-alt: #e0a050;
-  --accent-alt-rgb: 224, 160, 80;
-  --accent-alt-light: #eab870;
-  --accent-alt-lighter: #f0cc98;
-  --accent-alt-dark: #c88838;
-  --accent-alt-darker: #a87028;
+  --accent-alt: #d4a860;
+  --accent-alt-rgb: 212, 168, 96;
+  --accent-alt-light: #e0bc80;
+  --accent-alt-lighter: #e8d0a0;
+  --accent-alt-dark: #b08a48;
+  --accent-alt-darker: #906e38;
   --accent-alt-glow: rgba(var(--accent-alt-rgb), 0.15);
   --accent-alt-glow-strong: rgba(var(--accent-alt-rgb), 0.25);
 
@@ -306,48 +306,48 @@
 }
 
 [data-theme="light"] {
-  --accent: #5a8fb4;
-  --accent-rgb: 90, 143, 180;
-  --accent-light: #7aabc8;
-  --accent-lighter: #a8c8da;
-  --accent-dark: #407898;
-  --accent-darker: #2e5f7c;
+  --accent: #3a6b8c;
+  --accent-rgb: 58, 107, 140;
+  --accent-light: #5a8ba8;
+  --accent-lighter: #8ab0c8;
+  --accent-dark: #2a5070;
+  --accent-darker: #1a3850;
   --accent-glow: rgba(var(--accent-rgb), 0.12);
   --accent-glow-strong: rgba(var(--accent-rgb), 0.22);
 
-  --accent-alt: #5a9a8a;
-  --accent-alt-rgb: 90, 154, 138;
-  --accent-alt-light: #7ab4a6;
-  --accent-alt-lighter: #a4cec3;
-  --accent-alt-dark: #40806e;
-  --accent-alt-darker: #2e6858;
+  --accent-alt: #4a8a7a;
+  --accent-alt-rgb: 74, 138, 122;
+  --accent-alt-light: #6aa898;
+  --accent-alt-lighter: #9ac8ba;
+  --accent-alt-dark: #346e5e;
+  --accent-alt-darker: #24524a;
   --accent-alt-glow: rgba(var(--accent-alt-rgb), 0.12);
   --accent-alt-glow-strong: rgba(var(--accent-alt-rgb), 0.22);
 
-  --accent-warm: #c49a6c;
-  --accent-warm-rgb: 196, 154, 108;
-  --accent-warm-light: #d4b48e;
-  --accent-warm-lighter: #e4d0b8;
-  --accent-warm-dark: #a47e52;
-  --accent-warm-darker: #846438;
+  --accent-warm: #b08a60;
+  --accent-warm-rgb: 176, 138, 96;
+  --accent-warm-light: #c8a880;
+  --accent-warm-lighter: #e0c8a8;
+  --accent-warm-dark: #907048;
+  --accent-warm-darker: #705838;
   --accent-warm-glow: rgba(var(--accent-warm-rgb), 0.12);
   --accent-warm-glow-strong: rgba(var(--accent-warm-rgb), 0.22);
 
-  --accent-cool: #8a82a8;
-  --accent-cool-rgb: 138, 130, 168;
-  --accent-cool-light: #a8a0c0;
-  --accent-cool-lighter: #c8c0d8;
-  --accent-cool-dark: #6e6690;
-  --accent-cool-darker: #564e78;
+  --accent-cool: #7a78a0;
+  --accent-cool-rgb: 122, 120, 160;
+  --accent-cool-light: #9a98ba;
+  --accent-cool-lighter: #c0bdd8;
+  --accent-cool-dark: #5e5c82;
+  --accent-cool-darker: #484668;
   --accent-cool-glow: rgba(var(--accent-cool-rgb), 0.12);
   --accent-cool-glow-strong: rgba(var(--accent-cool-rgb), 0.22);
 
-  --bg-page: #e0e8f0;
+  --bg-page: #e4e9ef;
   --bg-card: #ffffff;
   --bg-card-solid: #ffffff;
   --bg-elevated: #ffffff;
-  --bg-muted: #d0d8e0;
-  --bg-sidebar: #f7f5f0;
+  --bg-muted: #d5dce6;
+  --bg-sidebar: #f5f7f9;
 
   --text-primary: #2c2c2c;
   --text-secondary: #4a4a4a;
@@ -355,13 +355,13 @@
   --text-muted: #8e8e8e;
   --text-inverse: #ffffff;
 
-  --border: #ddd9d0;
+  --border: #d0d5dd;
   --border-hover: var(--accent);
 
-  --tag-bg: #e8f0f4;
-  --tag-text: #3a6e8a;
-  --category-bg: #eef3f0;
-  --category-text: #3a7060;
+  --tag-bg: #e4ebf2;
+  --tag-text: #3a6080;
+  --category-bg: #eaf0ee;
+  --category-text: #3a6a60;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);

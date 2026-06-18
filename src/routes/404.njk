@@ -1,0 +1,21 @@
+---
+layout: base.njk
+title: 页面未找到
+permalink: /404.html
+---
+{% include "sidebar-left.njk" %}
+
+<main class="main-content" id="main-content">
+  <div style="text-align: center; padding: 4rem 0;">
+    <h1 class="page-title" style="font-size: 5rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; color: var(--accent);">404</h1>
+    <p class="page-subtitle" style="font-size: var(--text-xl); margin-bottom: 2rem;">页面未找到</p>
+    <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+      你访问的页面不存在，可能已被移除或链接有误。
+    </p>
+    <a href="/" class="pagination__item pagination__item--active" style="display: inline-flex; text-decoration: none;">
+      返回首页
+    </a>
+  </div>
+</main>
+
+{% include "sidebar-right.njk" %}

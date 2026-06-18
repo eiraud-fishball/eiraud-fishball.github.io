@@ -33,6 +33,16 @@ body {
   overflow-x: hidden;
 }
 
+/* Better readability for long-form content (Chinese + English) */
+.post-detail__content {
+  line-height: 1.85;
+  font-size: var(--text-base);
+}
+
+.post-detail__content p {
+  margin-bottom: 1.25em;
+}
+
 /* ================================================================ */
 /*  Typography                                                       */
 /* ================================================================ */
@@ -50,6 +60,28 @@ h4 { font-size: var(--text-lg); }
 h5 { font-size: var(--text-base); }
 h6 { font-size: var(--text-sm); }
 
+/* Heading spacing in long-form content — tighter below, room above */
+.post-detail__content h1,
+.post-detail__content h2,
+.post-detail__content h3,
+.post-detail__content h4 {
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+
+.post-detail__content h1:first-child,
+.post-detail__content h2:first-child,
+.post-detail__content h3:first-child,
+.post-detail__content h4:first-child {
+  margin-top: 0;
+}
+
+.post-detail__content h5,
+.post-detail__content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+
 p {
   margin-bottom: 1rem;
   color: var(--text-primary);
@@ -65,11 +97,23 @@ a:hover {
   color: var(--accent-dark);
 }
 
+/* Underline hint for links inside body content */
+.post-detail__content a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(var(--accent-rgb), 0.3);
+  text-decoration-thickness: 1px;
+}
+
+.post-detail__content a:hover {
+  text-decoration-color: var(--accent);
+}
+
 strong, b { font-weight: 600; }
 
 ::selection {
-  background: rgba(var(--accent-rgb), 0.18);
-  color: var(--accent-darker);
+  background: rgba(var(--accent-rgb), 0.3);
+  color: var(--text-primary);
 }
 
 /* ================================================================ */
@@ -79,6 +123,7 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+  border: 1px solid var(--border);
 }
 
 figure { margin: 1.5rem 0; }
@@ -112,6 +157,7 @@ code {
   padding: 0.15em 0.4em;
   background: var(--bg-muted);
   color: var(--accent-darker);
+  border: 1px solid var(--border);
 }
 
 pre {
@@ -128,6 +174,7 @@ pre {
 pre code {
   background: none;
   padding: 0;
+  border: none;
   color: var(--text-primary);
 }
 

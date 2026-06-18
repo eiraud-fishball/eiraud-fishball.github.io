@@ -41,7 +41,7 @@ pagination:
 
     {% for href in pagination.hrefs %}
       {% if href == page.url or (href == '/' and page.url == '') %}
-        <span class="pagination__item pagination__item--active">{{ loop.index }}</span>
+        <span class="pagination__item pagination__item--active" aria-current="page">{{ loop.index }}</span>
       {% else %}
         <a href="{{ href }}" class="pagination__item">{{ loop.index }}</a>
       {% endif %}

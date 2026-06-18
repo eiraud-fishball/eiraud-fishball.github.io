@@ -44,6 +44,7 @@ module.exports = function () {
       "哲学": "philosophy",
       "社会": "community",
       "OneDev": "onedev",
+      "语言": "language",
     },
   };
 };

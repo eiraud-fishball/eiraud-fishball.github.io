@@ -33,7 +33,7 @@
   <!-- Navigation Menu -->
   <nav class="left-nav__menu" aria-label="Main navigation">
     {% for item in nav %}
-      <a href="{{ item.url }}" class="left-nav__item{% if page.url == item.url %} left-nav__item--active{% endif %}">
+      <a href="{{ item.url }}" class="left-nav__item{% if page.url == item.url %} left-nav__item--active{% endif %}"{% if page.url == item.url %} aria-current="page"{% endif %}>
         {% if item.icon == "home" %}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9 21v-6h6v6"/></svg>
         {% elseif item.icon == "categories" %}
@@ -48,8 +48,9 @@
     {% endfor %}
   </nav>
 
-  <!-- Digital Clock -->
+  <!-- Digital Clock — Magazine Style -->
   <div class="clock-widget">
+    <div class="clock-widget__label">CURRENT TIME</div>
     <div class="clock-widget__time" id="clockTime">--:--:--</div>
     <div class="clock-widget__date" id="clockDate">----.--.--</div>
   </div>

@@ -122,6 +122,10 @@
     padding: 1rem 1.125rem;
   }
 
+  .main-content {
+    padding: 0.75rem 1rem;
+  }
+
   .categories-grid {
     grid-template-columns: 1fr 1fr;
   }

@@ -6,6 +6,9 @@
 <meta name="description" content="{{ description or site.description }}">
 <meta name="author" content="{{ author.name }}">
 
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
 <!-- ========================================================== -->
 <!--  Open Graph / Social Preview                                -->
 <!-- ========================================================== -->
@@ -36,6 +39,11 @@
 {% if verifications.google %}<meta name="google-site-verification" content="{{ verifications.google }}">{% endif %}
 {% if verifications.bing %}<meta name="msvalidate.01" content="{{ verifications.bing }}">{% endif %}
 {% if verifications.baidu %}<meta name="baidu-site-verification" content="{{ verifications.baidu }}">{% endif %}
+
+<!-- ========================================================== -->
+<!--  Theme Initialization (Inline — prevents FOUC)              -->
+<!-- ========================================================== -->
+<script>!function(){var t=localStorage.getItem("exyone-theme")||(window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t)}();</script>
 
 <!-- ========================================================== -->
 <!--  Stylesheets                                                -->

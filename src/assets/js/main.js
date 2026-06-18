@@ -313,6 +313,7 @@ function unlockScroll() {
     var fuse = null;          // Fuse.js instance, lazy-built
     var state = "idle";       // idle | loading | ready | error
     var debounceTimer = null;
+    var previousActiveElement = null;  // focus restoration
 
     /* ---------- escape HTML to prevent injection from index ---------- */
     function esc(str) {
@@ -342,6 +343,7 @@ function unlockScroll() {
     }
 
     function openModal() {
+      previousActiveElement = document.activeElement;
       searchModal.classList.add("active");
       lockScroll();
       setTimeout(function () { if (searchInput) searchInput.focus(); }, 150);
@@ -353,6 +355,10 @@ function unlockScroll() {
       unlockScroll();
       if (searchInput) searchInput.value = "";
       renderEmpty("输入关键词开始搜索");
+      if (previousActiveElement && previousActiveElement.focus) {
+        previousActiveElement.focus();
+        previousActiveElement = null;
+      }
     }
 
     function loadIndex() {
@@ -479,13 +485,6 @@ function unlockScroll() {
     const toggle = document.getElementById("themeToggle");
     const STORAGE_KEY = "exyone-theme";
 
-    // Get stored preference, or system preference, or 'light'
-    function getPreferredTheme() {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) return stored;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-
     function setTheme(theme) {
       document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem(STORAGE_KEY, theme);
@@ -494,9 +493,6 @@ function unlockScroll() {
         toggle.classList.toggle("is-light", theme === "light");
       }
     }
-
-    // Apply saved theme immediately (before paint)
-    setTheme(getPreferredTheme());
 
     // Toggle click handler
     if (toggle) {

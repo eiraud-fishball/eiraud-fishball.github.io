@@ -1,38 +1,22 @@
 /**
  * Theme & Decorative Styles (Presentation Layer)
  *
- * Grain overlay, hover effects, fade-in animations, back-to-top button.
+ * Surface styles, hover effects, fade-in animations, back-to-top button.
  */
 
 /* ================================================================ */
-/*  Subtle Grain Overlay (very light)                                */
+/*  Dark Mode Code Block Contrast Boost                              */
 /* ================================================================ */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.012;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
+[data-theme="dark"] pre {
+  background: #1a1a1e !important;
+  border-color: #3a3a44 !important;
 }
 
 @media (prefers-color-scheme: dark) {
-  body::after { opacity: 0.02; }
-}
-
-[data-theme="dark"] body::after { opacity: 0.02; }
-[data-theme="light"] body::after { opacity: 0.012; }
-
-/* ================================================================ */
-/*  Flat Surface                                                     */
-/* ================================================================ */
-.glass,
-.glass-strong {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  pre {
+    background: #1a1a1e !important;
+    border-color: #3a3a44 !important;
+  }
 }
 
 /* ================================================================ */

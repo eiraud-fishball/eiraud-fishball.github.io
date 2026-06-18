@@ -142,7 +142,7 @@
   padding: 0.75rem 0;
 }
 
-/* Author Card — flat, text-only, centered */
+/* Author Card — flat, text-only, magazine-style */
 .left-nav__author {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -159,12 +159,13 @@
 }
 
 .left-nav__site-title {
-  font-size: var(--text-xs);
-  font-weight: 600;
+  font-size: 0.6rem;
+  font-weight: 700;
   color: var(--accent);
-  margin: 0 0 0.15rem;
+  margin: 0 0 0.35rem;
   font-family: var(--font-mono);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .left-nav__site-tagline {
@@ -293,6 +294,7 @@
   border-top: 1px solid var(--border);
   padding: 1rem 0;
   margin-top: 2rem;
+  background: var(--bg-page);
 }
 
 .site-footer__inner {

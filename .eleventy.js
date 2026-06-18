@@ -93,7 +93,11 @@ module.exports = function (eleventyConfig) {
    */
   eleventyConfig.addFilter("wordCount", (text) => {
     if (!text) return 0;
-    const str = String(text).trim();
+    const str = String(text)
+      .replace(/<pre[^>]*>[\s\S]*?<\/pre>/g, "")  // strip code blocks first
+      .replace(/<code[^>]*>[\s\S]*?<\/code>/g, "")  // strip inline code
+      .replace(/<[^>]+>/g, " ")                       // strip HTML tags
+      .trim();
     // Count Chinese characters (CJK Unified Ideographs range)
     const chineseChars = (str.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g) || []).length;
     // Count English words (sequences of letters/numbers)
@@ -107,7 +111,11 @@ module.exports = function (eleventyConfig) {
    */
   eleventyConfig.addFilter("readingTime", (text) => {
     if (!text) return 1;
-    const str = String(text).trim();
+    const str = String(text)
+      .replace(/<pre[^>]*>[\s\S]*?<\/pre>/g, "")  // strip code blocks first
+      .replace(/<code[^>]*>[\s\S]*?<\/code>/g, "")  // strip inline code
+      .replace(/<[^>]+>/g, " ")                       // strip HTML tags
+      .trim();
     // Count Chinese characters
     const chineseChars = (str.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g) || []).length;
     // Count English words
