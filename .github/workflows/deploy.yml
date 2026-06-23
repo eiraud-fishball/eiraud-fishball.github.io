@@ -1,8 +1,6 @@
 name: Build and Deploy
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'
   push:
     branches:
       - main
@@ -26,19 +24,12 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Sync from OneDev
-        run: |
-          git remote add onedev https://git.exyon.ee/exyone.git
-          git fetch onedev
-          git checkout main
-          git reset --hard onedev/main
-          git push origin main --force
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -53,7 +44,6 @@ jobs:
         run: npm run build
 
       - name: Setup Pages
-        id: pages
         uses: actions/configure-pages@v5
 
       - name: Upload pages artifact
