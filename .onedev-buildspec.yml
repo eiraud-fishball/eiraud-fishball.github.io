@@ -8,7 +8,7 @@ jobs:
       type: DefaultCredential
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: setup build environment
     runInContainer: false
@@ -25,7 +25,7 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: install dependencies
     runInContainer: false
@@ -42,7 +42,7 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: build site
     runInContainer: false
@@ -61,18 +61,25 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: SetBuildVersionStep
     name: set build version
     buildVersion: '@build_number@'
     condition: SUCCESSFUL
     optional: false
-  
+
+  - type: JobCacheStep
+    name: publish build cache
+    key: exyone-blog-build
+    cachePath: /tmp/exyone-blog-build/_site
+    condition: SUCCESSFUL
+    optional: false
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
-  
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
@@ -86,7 +93,14 @@ jobs:
       type: DefaultCredential
     condition: SUCCESSFUL
     optional: false
-  
+
+  - type: JobCacheStep
+    name: retrieve build cache
+    key: exyone-blog-build
+    cachePath: /tmp/exyone-blog-build/_site
+    condition: SUCCESSFUL
+    optional: false
+
   - type: CommandStep
     name: build
     runInContainer: false
@@ -110,7 +124,7 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: deploy to cloudflare
     runInContainer: false
@@ -128,12 +142,12 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
-  
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 60
@@ -147,7 +161,14 @@ jobs:
       type: DefaultCredential
     condition: SUCCESSFUL
     optional: false
-  
+
+  - type: JobCacheStep
+    name: retrieve build cache
+    key: exyone-blog-build
+    cachePath: /tmp/exyone-blog-build/_site
+    condition: SUCCESSFUL
+    optional: false
+
   - type: CommandStep
     name: build
     runInContainer: false
@@ -171,7 +192,7 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: deploy to netlify
     runInContainer: false
@@ -184,12 +205,12 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
-  
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 60
@@ -203,7 +224,14 @@ jobs:
       type: DefaultCredential
     condition: SUCCESSFUL
     optional: false
-  
+
+  - type: JobCacheStep
+    name: retrieve build cache
+    key: exyone-blog-build
+    cachePath: /tmp/exyone-blog-build/_site
+    condition: SUCCESSFUL
+    optional: false
+
   - type: CommandStep
     name: build
     runInContainer: false
@@ -227,7 +255,7 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: deploy to codeberg pages
     runInContainer: false
@@ -246,19 +274,19 @@ jobs:
         find "$DEPLOY_DIR" -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
         cp -r _site/* "$DEPLOY_DIR/"
         cd "$DEPLOY_DIR"
-        echo "exyone.js.cool" > .domains
+        echo "blog.exyone.vip" > .domains
         git add .
         git commit -m "Deploy: Update site from OneDev build @build_number@"
         git push -f origin main
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
-  
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 60
@@ -272,7 +300,14 @@ jobs:
       type: DefaultCredential
     condition: SUCCESSFUL
     optional: false
-  
+
+  - type: JobCacheStep
+    name: retrieve build cache
+    key: exyone-blog-build
+    cachePath: /tmp/exyone-blog-build/_site
+    condition: SUCCESSFUL
+    optional: false
+
   - type: CommandStep
     name: build
     runInContainer: false
@@ -296,7 +331,7 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   - type: CommandStep
     name: deploy to git.gay pages
     runInContainer: false
@@ -321,12 +356,87 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
-  
+
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 60
+  timeout: 1800
+
+- name: Deploy to GitLink Pages
+  steps:
+  - type: CheckoutStep
+    name: checkout
+    cloneCredential:
+      type: DefaultCredential
+    condition: SUCCESSFUL
+    optional: false
+
+  - type: JobCacheStep
+    name: retrieve build cache
+    key: exyone-blog-build
+    cachePath: /tmp/exyone-blog-build/_site
+    condition: SUCCESSFUL
+    optional: false
+
+  - type: CommandStep
+    name: build
+    runInContainer: false
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        if [ ! -d "$BUILD_DIR/_site" ]; then
+          mkdir -p "$BUILD_DIR"
+          cp -r . "$BUILD_DIR/"
+          cd "$BUILD_DIR"
+          export PATH="/usr/local/bin:$PATH"
+          if [ -d "node_modules" ]; then
+            echo "node_modules exists, skipping npm ci"
+          else
+            echo "node_modules not found, running npm ci"
+            npm ci
+          fi
+          npm run build
+        fi
+    useTTY: false
+    condition: SUCCESSFUL
+    optional: false
+
+  - type: CommandStep
+    name: deploy to gitlink pages
+    runInContainer: false
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        BUILD_DIR="/tmp/exyone-blog-build"
+        DEPLOY_DIR="/tmp/gitlink-deploy"
+        cd "$BUILD_DIR"
+        git config --global user.email "[email protected]"
+        git config --global user.name "OneDev CI"
+        # Remove entire deploy directory (including .git) to ensure clean state
+        rm -rf "$DEPLOY_DIR"
+        git clone @secret:gitlink-pages-repo-url@ "$DEPLOY_DIR" --depth 1
+        # Clear all files except .git
+        find "$DEPLOY_DIR" -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+        cp -r _site/* "$DEPLOY_DIR/"
+        cd "$DEPLOY_DIR"
+        git add .
+        git commit -m "Deploy: Update site from OneDev build @build_number@"
+        git push -f origin main
+    useTTY: false
+    condition: SUCCESSFUL
+    optional: false
+
+  triggers:
+  - type: BranchUpdateTrigger
+    branches: main
+    userMatch: anyone
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 60
@@ -352,13 +462,13 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
   - type: TagCreateTrigger
-  
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
@@ -384,13 +494,13 @@ jobs:
     useTTY: false
     condition: SUCCESSFUL
     optional: false
-  
+
   triggers:
   - type: BranchUpdateTrigger
     branches: main
     userMatch: anyone
   - type: TagCreateTrigger
-  
+
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
