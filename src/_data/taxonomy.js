@@ -45,6 +45,9 @@ module.exports = function () {
       "社会": "community",
       "OneDev": "onedev",
       "语言": "language",
+      "F#": "fsharp",
+      ".NET": "dotnet",
+      "Zest": "zest",
     },
   };
 };

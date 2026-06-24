@@ -4,14 +4,6 @@
 var raw = {
   mySites: [
     {
-      name: '『自习室』EXYONE的篝火小屋',
-      urls: [
-        { url: 'https://blog.exyon.ee', label: 'blog.exyon.ee' },
-        { url: 'https://exyone.us.kg', label: 'exyone.us.kg' }
-      ],
-      description: '若有人兮山之阿，披薜荔兮带女萝。'
-    },
-    {
       name: 'EXYONE@BLOG:~$',
       urls: [
         { url: 'https://exyone.ee', label: 'exyone.ee' },

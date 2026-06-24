@@ -40,6 +40,9 @@
 
   {% include "footer.njk" %}
 
+  <!-- Overlay for mobile nav drawer (placed here to avoid transform stacking context issues) -->
+  <div class="left-nav__overlay" id="navOverlay"></div>
+
   <!-- Back to Top -->
   <button class="back-to-top" id="backToTop" aria-label="回到顶部" title="回到顶部">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">

@@ -56,6 +56,10 @@
   }
 
   /* --- Mobile Drawer Menu --- */
+  .site-header {
+    z-index: 110;
+  }
+
   .nav-toggle {
     display: flex;
   }
@@ -63,12 +67,16 @@
   .left-nav__overlay {
     display: block;
     position: fixed;
-    inset: 0;
+    top: 52px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 90;
     background: rgba(0, 0, 0, 0.45);
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition-base);
+    overscroll-behavior: contain;
   }
 
   .left-nav__overlay.active {
@@ -86,6 +94,7 @@
     width: 280px;
     max-width: 85vw;
     padding: 1rem 0.75rem;
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     background: var(--bg-card);

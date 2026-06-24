@@ -24,7 +24,7 @@
 {% elseif comments.provider == "twikoo" and comments.twikoo.env_id %}
 <section class="comments-section" id="comments">
   <div id="twikoo-comments"></div>
-  <script src="https://cdn.jsdelivr.net/npm/twikoo@{{ comments.twikoo.version }}/dist/twikoo.all.min.js"></script>
+  <script src="/assets/js/vendor/twikoo.min.js"></script>
   <script>twikoo.init({ envId: '{{ comments.twikoo.env_id }}', el: '#twikoo-comments' });</script>
 </section>
 {% endif %}
