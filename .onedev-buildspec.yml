@@ -68,13 +68,6 @@ jobs:
     condition: SUCCESSFUL
     optional: false
 
-  - type: JobCacheStep
-    name: publish build cache
-    key: exyone-blog-build
-    cachePath: /tmp/exyone-blog-build/_site
-    condition: SUCCESSFUL
-    optional: false
-
   triggers:
   - type: BranchUpdateTrigger
     branches: main
@@ -94,34 +87,12 @@ jobs:
     condition: SUCCESSFUL
     optional: false
 
-  - type: JobCacheStep
-    name: retrieve build cache
-    key: exyone-blog-build
-    cachePath: /tmp/exyone-blog-build/_site
-    condition: SUCCESSFUL
-    optional: false
-
-  - type: CommandStep
-    name: build
-    runInContainer: false
-    interpreter:
-      type: DefaultInterpreter
-      commands: |
-        BUILD_DIR="/tmp/exyone-blog-build"
-        if [ ! -d "$BUILD_DIR/_site" ]; then
-          mkdir -p "$BUILD_DIR"
-          cp -r . "$BUILD_DIR/"
-          cd "$BUILD_DIR"
-          export PATH="/usr/local/bin:$PATH"
-          if [ -d "node_modules" ]; then
-            echo "node_modules exists, skipping npm ci"
-          else
-            echo "node_modules not found, running npm ci"
-            npm ci
-          fi
-          npm run build
-        fi
-    useTTY: false
+  - type: JobDependency
+    name: retrieve build artifact
+    jobName: Build Blog
+    requireSuccessful: true
+    artifacts:
+      - /tmp/exyone-blog-build/_site
     condition: SUCCESSFUL
     optional: false
 
@@ -162,34 +133,12 @@ jobs:
     condition: SUCCESSFUL
     optional: false
 
-  - type: JobCacheStep
-    name: retrieve build cache
-    key: exyone-blog-build
-    cachePath: /tmp/exyone-blog-build/_site
-    condition: SUCCESSFUL
-    optional: false
-
-  - type: CommandStep
-    name: build
-    runInContainer: false
-    interpreter:
-      type: DefaultInterpreter
-      commands: |
-        BUILD_DIR="/tmp/exyone-blog-build"
-        if [ ! -d "$BUILD_DIR/_site" ]; then
-          mkdir -p "$BUILD_DIR"
-          cp -r . "$BUILD_DIR/"
-          cd "$BUILD_DIR"
-          export PATH="/usr/local/bin:$PATH"
-          if [ -d "node_modules" ]; then
-            echo "node_modules exists, skipping npm ci"
-          else
-            echo "node_modules not found, running npm ci"
-            npm ci
-          fi
-          npm run build
-        fi
-    useTTY: false
+  - type: JobDependency
+    name: retrieve build artifact
+    jobName: Build Blog
+    requireSuccessful: true
+    artifacts:
+      - /tmp/exyone-blog-build/_site
     condition: SUCCESSFUL
     optional: false
 
@@ -225,34 +174,12 @@ jobs:
     condition: SUCCESSFUL
     optional: false
 
-  - type: JobCacheStep
-    name: retrieve build cache
-    key: exyone-blog-build
-    cachePath: /tmp/exyone-blog-build/_site
-    condition: SUCCESSFUL
-    optional: false
-
-  - type: CommandStep
-    name: build
-    runInContainer: false
-    interpreter:
-      type: DefaultInterpreter
-      commands: |
-        BUILD_DIR="/tmp/exyone-blog-build"
-        if [ ! -d "$BUILD_DIR/_site" ]; then
-          mkdir -p "$BUILD_DIR"
-          cp -r . "$BUILD_DIR/"
-          cd "$BUILD_DIR"
-          export PATH="/usr/local/bin:$PATH"
-          if [ -d "node_modules" ]; then
-            echo "node_modules exists, skipping npm ci"
-          else
-            echo "node_modules not found, running npm ci"
-            npm ci
-          fi
-          npm run build
-        fi
-    useTTY: false
+  - type: JobDependency
+    name: retrieve build artifact
+    jobName: Build Blog
+    requireSuccessful: true
+    artifacts:
+      - /tmp/exyone-blog-build/_site
     condition: SUCCESSFUL
     optional: false
 
@@ -301,34 +228,12 @@ jobs:
     condition: SUCCESSFUL
     optional: false
 
-  - type: JobCacheStep
-    name: retrieve build cache
-    key: exyone-blog-build
-    cachePath: /tmp/exyone-blog-build/_site
-    condition: SUCCESSFUL
-    optional: false
-
-  - type: CommandStep
-    name: build
-    runInContainer: false
-    interpreter:
-      type: DefaultInterpreter
-      commands: |
-        BUILD_DIR="/tmp/exyone-blog-build"
-        if [ ! -d "$BUILD_DIR/_site" ]; then
-          mkdir -p "$BUILD_DIR"
-          cp -r . "$BUILD_DIR/"
-          cd "$BUILD_DIR"
-          export PATH="/usr/local/bin:$PATH"
-          if [ -d "node_modules" ]; then
-            echo "node_modules exists, skipping npm ci"
-          else
-            echo "node_modules not found, running npm ci"
-            npm ci
-          fi
-          npm run build
-        fi
-    useTTY: false
+  - type: JobDependency
+    name: retrieve build artifact
+    jobName: Build Blog
+    requireSuccessful: true
+    artifacts:
+      - /tmp/exyone-blog-build/_site
     condition: SUCCESSFUL
     optional: false
 
@@ -376,34 +281,12 @@ jobs:
     condition: SUCCESSFUL
     optional: false
 
-  - type: JobCacheStep
-    name: retrieve build cache
-    key: exyone-blog-build
-    cachePath: /tmp/exyone-blog-build/_site
-    condition: SUCCESSFUL
-    optional: false
-
-  - type: CommandStep
-    name: build
-    runInContainer: false
-    interpreter:
-      type: DefaultInterpreter
-      commands: |
-        BUILD_DIR="/tmp/exyone-blog-build"
-        if [ ! -d "$BUILD_DIR/_site" ]; then
-          mkdir -p "$BUILD_DIR"
-          cp -r . "$BUILD_DIR/"
-          cd "$BUILD_DIR"
-          export PATH="/usr/local/bin:$PATH"
-          if [ -d "node_modules" ]; then
-            echo "node_modules exists, skipping npm ci"
-          else
-            echo "node_modules not found, running npm ci"
-            npm ci
-          fi
-          npm run build
-        fi
-    useTTY: false
+  - type: JobDependency
+    name: retrieve build artifact
+    jobName: Build Blog
+    requireSuccessful: true
+    artifacts:
+      - /tmp/exyone-blog-build/_site
     condition: SUCCESSFUL
     optional: false
 
