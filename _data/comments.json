@@ -1,13 +1,14 @@
 {
   "provider": "twikoo",
   "giscus": {
-    "repo": "exyone-labs/exyone-labs.github.io",
-    "repo_id": "R_kgDOSARDDA",
+    "repo": "exyone-js/exyone-js.github.io",
+    "repo_id": "R_kgDOSzU8GA",
     "category": "Comments",
-    "category_id": "DIC_kwDOSARDDM4C6pqo",
+    "category_id": "DIC_kwDOSzU8GM4C_2T_",
     "mapping": "pathname",
     "strict": 0,
     "input_position": "top",
+    "data-theme": "fro",
     "reactions_enabled": true
   },
   "twikoo": {
