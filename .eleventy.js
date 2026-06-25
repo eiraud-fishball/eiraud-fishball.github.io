@@ -10,7 +10,7 @@ const { rssPlugin: pluginRss } = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 // Load taxonomy mapping for URL-safe slugs
-const taxonomy = require("./src/_data/taxonomy.js")();
+const taxonomy = require("./_data/taxonomy.js")();
 
 module.exports = function (eleventyConfig) {
   /* ------------------------------------------------------------------ */
@@ -20,9 +20,15 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
 
   /* ------------------------------------------------------------------ */
+  /*  Ignore root-level non-source files                                 */
+  /* ------------------------------------------------------------------ */
+  eleventyConfig.ignores.add("README.md");
+  eleventyConfig.ignores.add("LICENSE");
+
+  /* ------------------------------------------------------------------ */
   /*  Passthrough Copy: Static Assets                                    */
   /* ------------------------------------------------------------------ */
-  eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("assets");
 
   /* ------------------------------------------------------------------ */
   /*  Filters                                                            */
@@ -174,7 +180,7 @@ module.exports = function (eleventyConfig) {
   /** Get all published posts (exclude drafts) */
   function getPosts(collectionApi) {
     return collectionApi
-      .getFilteredByGlob("src/_posts/**/*.md")
+      .getFilteredByGlob("_posts/**/*.md")
       .filter((post) => process.env.ELEVENTY_RUN_MODE !== "serve" ? !post.data.draft : true)
       .sort((a, b) => b.date - a.date);
   }
@@ -283,7 +289,7 @@ module.exports = function (eleventyConfig) {
   /* ------------------------------------------------------------------ */
   return {
     dir: {
-      input: "src",
+      input: ".",
       output: "_site",
       includes: "_includes",
       layouts: "_layouts",
