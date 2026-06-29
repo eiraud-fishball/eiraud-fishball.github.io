@@ -12,7 +12,7 @@
     "reactions_enabled": true
   },
   "twikoo": {
-    "env_id": "https://comments.exyone.us.kg/",
-    "version": "1.6.44"
+    "env_id": "https://cmt.exyone.top/",
+    "version": "1.7.13"
   }
 }
