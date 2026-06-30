@@ -48,6 +48,7 @@ module.exports = function () {
       "F#": "fsharp",
       ".NET": "dotnet",
       "Zest": "zest",
+      "生活": "life",
     },
   };
 };
