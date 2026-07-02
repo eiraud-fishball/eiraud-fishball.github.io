@@ -285,6 +285,17 @@ module.exports = function (eleventyConfig) {
   });
 
   /* ------------------------------------------------------------------ */
+  /*  afterBuild — lazy-generate friends page with feed fetching         */
+  /* ------------------------------------------------------------------ */
+  const { generateFriendsPage } = require('./routes/friends.11ty.js');
+
+  eleventyConfig.on('eleventy.after', async () => {
+    const dataDir = path.join(__dirname, '_data');
+    const outDir  = path.join(__dirname, '_site');
+    await generateFriendsPage(dataDir, outDir);
+  });
+
+  /* ------------------------------------------------------------------ */
   /*  Build Configuration                                                */
   /* ------------------------------------------------------------------ */
   return {
@@ -295,7 +306,7 @@ module.exports = function (eleventyConfig) {
       layouts: "_layouts",
       data: "_data",
     },
-    templateFormats: ["njk", "md"],
+    templateFormats: ["njk", "11ty.js", "md"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
   };

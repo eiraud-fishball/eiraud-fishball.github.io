@@ -13,23 +13,123 @@ permalink: /links/
   <article>
     <blockquote class="post-content"><p>如需提交友链，请在评论区留言。</p></blockquote>
 
+    <style>
+.ln-group { margin-bottom: 2.25rem; }
+.ln-group:last-child { margin-bottom: 0; }
+
+.ln-group__title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.ln-list { display: flex; flex-direction: column; }
+
+/* ── Item ── */
+.ln-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition-fast);
+}
+.ln-item:last-child { border-bottom: none; }
+.ln-item:hover { background: rgba(var(--accent-rgb), 0.03); }
+
+.ln-item--hidden { display: none; }
+.ln-group.is-expanded .ln-item--hidden { display: flex; }
+
+.ln-item__name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ln-item__desc {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.ln-item__url {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0.75;
+  transition: opacity var(--transition-fast);
+}
+.ln-item:hover .ln-item__url { opacity: 1; }
+
+/* ── Toggle ── */
+.ln-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0;
+  border: none;
+  background: transparent;
+  font-size: var(--text-xs);
+  color: var(--accent);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+.ln-toggle:hover { opacity: 1; }
+</style>
+
     {% for group in links.groups %}
-    <div class="ln-group">
+    <section class="ln-group{% if group.collapsible %} js-ln-group{% endif %}">
       <h2 class="ln-group__title">{{ group.title }}</h2>
 
-      <ul class="ln-plain">
+      <div class="ln-list">
       {% for item in group.items %}
-        <li class="ln-plain__item">
-          <span class="ln-plain__name">{{ item.name }}</span>
-          <span class="ln-plain__right">
-            <a href="{{ item.url }}" target="_blank" rel="noopener" class="ln-plain__url">{{ item.url | replace('https://', '') }}</a>
-            <span class="ln-plain__desc">{{ item.description }}</span>
-          </span>
-        </li>
+        {% set is_collapsible = group.collapsible and loop.index > 1 %}
+        <a href="{{ item.url }}"
+           target="_blank" rel="noopener"
+           class="ln-item{% if is_collapsible %} ln-item--hidden{% endif %}">
+          <span class="ln-item__name">{{ item.name }}</span>
+          <span class="ln-item__desc">{{ item.description }}</span>
+          <span class="ln-item__url">{{ item.url }}</span>
+        </a>
       {% endfor %}
-      </ul>
-    </div>
+      </div>
+
+      {% if group.collapsible %}
+      <button class="ln-toggle">展开全部镜像站 ▼</button>
+      {% endif %}
+    </section>
     {% endfor %}
+
+<script>
+(function() {
+  var groups = document.querySelectorAll('.js-ln-group');
+  groups.forEach(function(group) {
+    var btn = group.querySelector('.ln-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var expanded = group.classList.toggle('is-expanded');
+      btn.textContent = expanded ? '收起 ▲' : '展开全部镜像站 ▼';
+    });
+  });
+})();
+</script>
   </article>
 
   {% include "comments.njk" %}
